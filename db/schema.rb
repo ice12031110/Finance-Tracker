@@ -10,19 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_28_034451) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_28_052422) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
-
-  create_table "asset_snapshots", force: :cascade do |t|
-    t.bigint "asset_id", null: false
-    t.date "date"
-    t.decimal "price"
-    t.decimal "market_value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["asset_id"], name: "index_asset_snapshots_on_asset_id"
-  end
 
   create_table "assets", force: :cascade do |t|
     t.string "name"
@@ -134,6 +124,4 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_034451) do
     t.datetime "updated_at", null: false
     t.index ["ticker", "date"], name: "index_stock_prices_on_ticker_and_date", unique: true
   end
-
-  add_foreign_key "asset_snapshots", "assets"
 end
