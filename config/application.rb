@@ -16,6 +16,13 @@ module FinanceTracker
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    # Use GoodJob for ActiveJob
+    config.active_job.queue_adapter = :good_job
+
+    # Enable cron jobs from YAML (for scheduled jobs)
+    config.good_job.enable_cron = true
+    config.good_job.cron = Rails.root.join("config/schedule.yml")
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
