@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_28_023314) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_28_031415) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -33,6 +33,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_023314) do
     t.string "currency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "stock_prices", force: :cascade do |t|
+    t.string "ticker", null: false
+    t.date "date", null: false
+    t.decimal "price", precision: 15, scale: 2, null: false
+    t.string "source", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticker", "date"], name: "index_stock_prices_on_ticker_and_date", unique: true
   end
 
   add_foreign_key "asset_snapshots", "assets"
