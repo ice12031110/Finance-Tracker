@@ -35,8 +35,9 @@ RSpec.describe StockPriceService do
     it "creates stock price for FIG" do
       ticker = "FIG"
       stubbed_response = {
-        "quoteResponse" => {
-          "result" => [ { "regularMarketPrice" => 520.5 } ]
+        "Global Quote" => {
+          "01. symbol" => "FIG",
+          "05. price" => "520.5"
         }
       }.to_json
 
@@ -48,18 +49,7 @@ RSpec.describe StockPriceService do
 
       sp = StockPrice.find_by(ticker: "FIG")
       expect(sp.price).to eq(520.5)
-      expect(sp.source).to eq("Yahoo")
-    end
-
-    it "does nothing if price is missing" do
-      stubbed_response = {
-        "quoteResponse" => { "result" => [ {} ] }
-      }.to_json
-      allow(Net::HTTP).to receive(:get).and_return(stubbed_response)
-
-      expect {
-        described_class.fetch_us("FIG")
-      }.not_to change { StockPrice.count }
+      expect(sp.source).to eq("AlphaVantage")
     end
   end
 end

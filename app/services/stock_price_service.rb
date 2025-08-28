@@ -47,7 +47,7 @@ class StockPriceService
     end
 
     # 美股：批量抓取（依 Asset 中有的 ticker）
-    def self.fetch_us_all
+    def fetch_us_all
       Asset.distinct.pluck(:ticker).each do |ticker|
         next if ticker.match?(/^\d{4}$/) # 台股略過
         fetch_us(ticker)

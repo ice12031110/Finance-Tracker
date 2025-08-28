@@ -19,9 +19,8 @@ module FinanceTracker
     # Use GoodJob for ActiveJob
     config.active_job.queue_adapter = :good_job
 
-    # Enable cron jobs from YAML (for scheduled jobs)
-    config.good_job.enable_cron = true
-    config.good_job.cron = Rails.root.join("config/schedule.yml")
+    config.time_zone = "Taipei"
+    config.active_record.default_timezone = :local
 
     # Configuration for the application, engines, and railties goes here.
     #

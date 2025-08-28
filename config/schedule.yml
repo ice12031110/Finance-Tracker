@@ -1,0 +1,4 @@
+update_stock_prices:
+  cron: "30 17 * * *"
+  class: "UpdateStockPricesJob"
+  description: "每日更新股票收盤價"
