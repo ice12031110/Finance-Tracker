@@ -50,7 +50,13 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem 'annotaterb', '~> 4.18'
+  gem "annotaterb", "~> 4.18"
+
+  gem "rspec-rails"
+
+  gem "faker"
+
+  gem "factory_bot_rails"
 end
 
 group :development do
