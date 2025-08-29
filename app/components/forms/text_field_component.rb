@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Forms::TextFieldComponent < ViewComponent::Base
+class Forms::TextFieldComponent < ApplicationComponent
   attr_reader :form, :attribute, :label, :options, :required, :classes, :coustom_error_message
 
   def initialize(**args)

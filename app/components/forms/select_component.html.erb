@@ -1,0 +1,15 @@
+<% if label %>
+  <%= label_tag name, label, class: "block font-normal mb-2 #{required}" %>
+<% end %>
+
+<div class="relative tom-select-container border border-gray-100 rounded-md <%= container_classes %> <%= 'border-nkic-error' if error.present? %>">
+  <%= select_tag name, options_for_select(choices, selected), options.merge(html_options) %>
+</div>
+
+<% if error.present? %>
+  <div class="pl-2 mt-1.5 text-nkic-error"><%= error %></div>
+<% end %>
+
+<% if hint %>
+  <p class="hint pl-2"><%= hint %></p>
+<% end %>
