@@ -1,0 +1,13 @@
+<div>
+  <% if form.present? %>
+    <%= form.label attribute, label, class: "font-normal #{required}" %>
+    <%= form.text_field attribute, **options, class: "px-3 mt-1.5 w-full #{classes} #{error_class}" %>
+  <% else %>
+    <%= label_tag attribute, label, class: "font-normal #{required}" %>
+    <%= text_field_tag attribute, options[:value], **options.except(:value), class: "px-3 mt-1.5 w-full #{classes} #{error_class}" %>
+  <% end %>
+
+  <% if error_message %>
+    <p class="text-nkic-error mt-1.5"><%= error_message %></p>
+  <% end %>
+</div>
