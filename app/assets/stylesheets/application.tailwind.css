@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import 'tom-select/dist/css/tom-select';
+@import './tom-select';
 
 @layer components {
   .button {
