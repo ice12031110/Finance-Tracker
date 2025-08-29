@@ -1,2 +1,4 @@
 web: env bin/rails server -p $PORT
 worker: bundle exec good_job start
+js: yarn build --watch
+css: yarn build:css --watch

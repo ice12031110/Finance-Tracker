@@ -73,3 +73,7 @@ group :test do
 end
 
 gem "good_job"
+
+gem "jsbundling-rails"
+
+gem "cssbundling-rails"
