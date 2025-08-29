@@ -19,8 +19,9 @@ module FinanceTracker
     # Use GoodJob for ActiveJob
     config.active_job.queue_adapter = :good_job
 
-    config.time_zone = "Taipei"
+    config.time_zone = "Asia/Taipei"
     config.active_record.default_timezone = :local
+    config.i18n.default_locale = :"zh-TW"
 
     # Configuration for the application, engines, and railties goes here.
     #

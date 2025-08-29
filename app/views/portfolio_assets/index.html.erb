@@ -1,0 +1,92 @@
+<div class="min-h-screen bg-gray-50 p-10">
+
+  <div class="bg-gradient-primary" style="border-bottom: 1px solid rgba(91, 155, 213, 0.2);">
+    <div class="container py-8">
+      <h1 class="text-3xl font-bold text-primary">資產管理系統</h1>
+      <p class="text-gray-600 mt-2">管理和追蹤您的投資組合</p>
+    </div>
+  </div>
+
+  <div class="container py-8">
+    <div class="flex bg-gray-100 rounded-lg p-1 max-w-md mx-auto mb-8">
+      <button id="overviewTab" class="flex-1 py-2 px-4 text-sm font-medium rounded-md tab-active transition-colors">
+        <span class="flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+            </path>
+          </svg>
+          總覽分析
+        </span>
+      </button>
+
+      <button id="manageTab" class="flex-1 py-2 px-4 text-sm font-medium rounded-md tab-inactive transition-colors">
+        <span class="flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+            </path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          資產管理
+        </span>
+      </button>
+    </div>
+    <div class="grid gap-y-5">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">資產明細</h2>
+      <%= link_to '新增資產', new_portfolio_asset_path, class: 'button w-24' %>
+      <% @resources.each do |resource| %>
+        <div class="bg-white border rounded-lg p-6 shadow-sm relative">
+          <div class="absolute top-4 right-4 flex gap-2">
+            <%# TODO: trancsation index %>
+            <%= link_to '#',
+                        class: "px-3 py-1 text-sm rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100" do %>
+              交易紀錄
+            <% end %>
+
+            <%# TODO: edit page %>
+            <%= link_to edit_portfolio_asset_path(resource),
+                        class: "px-3 py-1 text-sm rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100" do %>
+              編輯
+            <% end %>
+
+            <%# TODO: delete feature %>
+            <%= button_to portfolio_asset_path(resource),
+                          method: :delete,
+                          data: { confirm: "確定要刪除這筆資產嗎？" },
+                          class: "px-3 py-1 text-sm rounded-md bg-red-50 text-red-600 hover:bg-red-100" do %>
+              刪除
+            <% end %>
+          </div>
+
+          <div class="flex items-center gap-4 mb-4">
+            <div class="text-lg font-semibold text-primary"><%= resource.name %></div>
+            <span class="px-3 py-1 text-sm rounded-full bg-blue-50 text-blue-700">
+              <%= resource.category %>
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-y-3 text-gray-700">
+            <div>
+              <span class="font-medium">均價：</span>
+              <%= number_to_currency(resource.avg_cost || 0, unit: "") %>
+            </div>
+            <div>
+              <span class="font-medium">數量：</span>
+              <%= resource.quantity.to_i || 0 %>
+            </div>
+            <div>
+              <span class="font-medium">幣別：</span>
+              <%= resource.currency %>
+            </div>
+            <div>
+              <span class="font-medium">代號：</span>
+              <%= resource.ticker %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

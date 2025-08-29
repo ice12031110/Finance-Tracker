@@ -16,7 +16,7 @@ class Asset < ApplicationRecord
   enum :category, { stock: 0, cash: 1, crypto: 2 }
   has_many :transactions, dependent: :destroy
 
-  validates :name, :category, :quantity, :currency, :ticker, presence: true
+  validates :name, :category, :currency, :ticker, presence: true
 
   after_create :ensure_stock_price_data
 
