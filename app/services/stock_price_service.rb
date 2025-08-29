@@ -16,10 +16,11 @@ class StockPriceService
         price  = row["ClosingPrice"].to_f
         next if price.zero?
 
-        StockPrice.find_or_create_by!(ticker: ticker, date: Date.today) do |sp|
-          sp.price  = price
-          sp.source = "TWSE"
-        end
+        stock_price = StockPrice.find_or_initialize_by(ticker: ticker)
+        stock_price.update!(
+          price: price,
+          source: "TWSE"
+        )
       end
     end
 
